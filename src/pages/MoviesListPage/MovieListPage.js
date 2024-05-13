@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { moviesAll, getCast } from '../../services/MovieService';
+import { moviesAll } from '../../services/MovieService';
 import Spinner from '../../components/Spinner/spinner';
 import Star from '../../components/star/star';
 import './MoviesListPage.css';
