@@ -1,13 +1,16 @@
+// MovieListPage.js
+
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { moviesAll } from '../../services/MovieService';
-import { Link } from 'react-router-dom'; // Importa Link desde React Router
+import Spinner from '../../components/Spinner/spinner';
+import Star from '../../components/star/star';
 import './MoviesListPage.css';
 
 function MovieListPage() {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
-
 
   useEffect(() => {
     const fetchData = async () => {
@@ -17,6 +20,7 @@ function MovieListPage() {
 
         // Obtener lista de películas de la página actual
         const moviesData = await moviesAll(currentPage);
+
         // Concatenar las nuevas películas con las anteriores
         setMovies(prevMovies => [...prevMovies, ...moviesData]);
 
@@ -36,24 +40,22 @@ function MovieListPage() {
     setCurrentPage(prevPage => prevPage + 1);
   };
 
-  const handleImageLoaded = () => {
-    // Marcar la imagen como cargada
-    setLoading(false);
-  };
-
   return (
     <div className="peliculas-container">
       <div className="movies-container">
         {movies.map((movie, index) => (
           <div key={`${movie.id}-${index}`} className="movie-card">
             <Link to={`/movie/${movie.id}`} className="movie-link"> {/* Enlace al detalle de la película */}
-              <img className={`movie-poster ${loading ? '' : 'loaded'}`}
+              <img className="movie-poster"
                 src={`${process.env.REACT_APP_BASE_URL_TMDB_IMG}${movie.poster_path}`}
-                onLoad={handleImageLoaded}
                 alt={movie.title} />
-
               <div className="movie-overlay">
-                <p className="movie-rating">{movie.vote_average}</p>
+                <div className="movie-rating">
+                  {[...Array(Math.floor(movie.vote_average / 2))].map((_, index) => (
+                    <Star key={index} filled />
+                  ))}
+                  {movie.vote_average % 2 !== 0 && <Star filled={false} />}
+                </div>
                 <p className="movie-votes">{movie.vote_count} Votos</p>
                 <p className="movie-popularity">Popularidad: {movie.popularity}</p>
               </div>
@@ -68,33 +70,12 @@ function MovieListPage() {
       </div>
       {loading && (
         <div className="loading-overlay">
-          <div className="spinner"></div>
+          <Spinner />
           <p>Cargando películas...</p>
         </div>
       )}
       <button className="load-more-button" onClick={loadMoreMovies}>Cargar Más Películas</button>
     </div>
-    // <div className="peliculas-container">
-
-    //   <div className="movies-container">
-    //     {movies.map(movie => (
-    //       <div key={movie.id} className="movie-card">
-    //         <div className="movie-overlay">
-    //           <p className="movie-rating">{movie.vote_average}</p>
-    //           <p className="movie-votes">{movie.vote_count} Votos</p>
-    //           <p className="movie-popularity">Popularidad: {movie.popularity}</p>
-    //         </div>
-    //         <div className="movie-details">
-    //           <h2>{movie.title}</h2>
-    //           <p>Adulto: {movie.adult ? 'Sí' : 'No'}</p>
-    //           {/* <p>Descripción: {movie.overview}</p> */}
-    //           <p>Fecha de Lanzamiento: {movie.release_date}</p>
-    //         </div>
-    //         <img className="movie-poster" src={`${process.env.REACT_APP_BASE_URL_TMDB_IMG}${movie.poster_path}`} alt={movie.title} />
-    //       </div>
-    //     ))}
-    //   </div>
-    // </div>
   );
 }
 

@@ -1,46 +1,57 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom'; // Importa useParams para obtener el parámetro de la ruta
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { getMovieById } from '../../services/MovieService';
+import Spinner from '../../components/Spinner/spinner';
+import Star from '../../components/star/star';
 import './MoviesDetail.css';
 
+
 function MovieDetailPage() {
-  const { id } = useParams(); // Obtiene el parámetro ID de la ruta
+  const { id } = useParams();
   const [movie, setMovie] = useState(null);
+  const [loading, setLoading] = useState(true); // Estado para controlar la carga
 
   useEffect(() => {
     const fetchMovie = async () => {
-      try {
-        // Obtener detalles de la película por ID
-        const movieData = await getMovieById(id);
-        setMovie(movieData);
-      } catch (error) {
-        console.error('Error al obtener detalles de la película:', error);
-      }
+      const movieData = await getMovieById(id);
+      setMovie(movieData);
+      setLoading(false);
     };
 
     fetchMovie();
-  }, [id]); // Vuelve a cargar los detalles de la película cuando cambia el ID
+  }, [id]);
+
+
 
   return (
-    <div className="movie-detail-container">
-      {movie && (
+    <div className="movie-detail">
+      {loading ? ( // Si loading es true, mostramos el Spinner
+        <Spinner />
+      ) : (
         <>
-          <div className="movie-detail-header">
-            <img src={`${process.env.REACT_APP_BASE_URL_TMDB_IMG}${movie.poster_path}`} className="movie-detail-poster" alt={movie.title}/>
-            <div className="movie-detail-info">
-              <h1 className="movie-detail-title">{movie.title}</h1>
-              <p className="movie-detail-rating">Puntuación: {movie.vote_average}</p>
-              <p className="movie-detail-votes">Votos: {movie.vote_count}</p>
-              <p className="movie-detail-popularity">Popularidad: {movie.popularity}</p>
-              <p className="movie-detail-release-date">Fecha de Lanzamiento: {movie.release_date}</p>
-              <p className="movie-detail-adult">Adulto: {movie.adult ? 'Sí' : 'No'}</p>
+          <div className="movie-detail__header">
+            <img className={`movie-detail__poster ${loading ? '' : 'loaded'}`}
+              src={`${process.env.REACT_APP_BASE_URL_TMDB_IMG}${movie.backdrop_path}`}
+              alt={movie.title} />
+            <div className="movie-detail__info">
+              <h2 className="movie-detail__title">{movie.title}</h2>
+              <p className="movie-detail__release-date">
+                {movie.release_date}
+              </p>
+              <p className="movie-detail__overview">{movie.overview}</p>
+              <p className="movie-detail__popularity">Popularidad: {movie.popularity}</p>
+              <div className="movie-detail__rating">
+              <div className="movie-rating">
+                  {[...Array(Math.floor(movie.vote_average / 2))].map((_, index) => (
+                    <Star key={index} filled />
+                  ))}
+                  {movie.vote_average % 2 !== 0 && <Star filled={false} />}
+                </div>
+                <p className="movie-detail__rating-label"></p>
+              </div>
+              <button className="movie-detail__watch-button">Ver película</button>
             </div>
           </div>
-          <div className="movie-detail-overview">
-            <h2>Resumen</h2>
-            <p>{movie.overview}</p>
-          </div>
-        
         </>
       )}
     </div>

@@ -1,5 +1,3 @@
-// HeaderComponent.js
-
 import React, { useState, useEffect } from 'react';
 import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
 import './Header.css';

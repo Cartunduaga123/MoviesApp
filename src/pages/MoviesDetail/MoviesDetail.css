@@ -1,54 +1,93 @@
-/* styles.css */
+/* Bloque principal */
+.movie-detail {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #12181f;
+  color: #fff;
+}
 
-.movie-detail-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-  }
-  
-  .movie-detail-header {
-    display: flex;
-    align-items: flex-start;
-  }
-  
-  .movie-detail-poster {
-    width: 200px;
-    height: auto;
-    margin-right: 20px;
-  }
-  
-  .movie-detail-info {
-    flex: 1;
-  }
-  
-  .movie-detail-title {
-    font-size: 24px;
-    margin-bottom: 10px;
-  }
-  
-  .movie-detail-rating {
-    font-size: 18px;
-    margin-bottom: 5px;
-  }
-  
-  .movie-detail-votes,
-  .movie-detail-popularity,
-  .movie-detail-release-date,
-  .movie-detail-adult {
-    font-size: 16px;
-    margin-bottom: 5px;
-  }
-  
-  .movie-detail-overview {
-    margin-top: 20px;
-  }
-  
-  .movie-detail-overview h2 {
-    font-size: 20px;
-    margin-bottom: 10px;
-  }
-  
-  .movie-detail-overview p {
-    font-size: 16px;
-    line-height: 1.5;
-  }
+/* Elementos */
+.movie-detail__header {
+  display: flex;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+}
+
+.movie-detail__poster {
+  width: 70%;
+  height: auto;
+  margin-right: 30px;
+}
+
+.movie-detail__info {
+  flex: 1;
+}
+
+.movie-detail__title {
+  font-size: 36px;
+  margin: 0 0 10px;
+}
+
+.movie-detail__release-date {
+  font-size: 18px;
+  margin: 0 0 10px;
+}
+
+.movie-detail__overview {
+  font-size: 20px;
+  margin: 0 0 30px;
+  text-align: justify;
+  /* Justifica el texto */
+  text-align-last: center;
+  /* Centra el último renglón */
+}
+
+.movie-detail__rating {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.movie-detail__vote_average {
+  display: flex;
+}
+
+.movie-detail__rating-value {
+  font-size: 36px;
+  font-weight: bold;
+  margin-right: 10px;
+  color: #ffbf00;
+  /* Color amarillo para resaltar el valor */
+}
+
+.movie-detail__popularity {
+  font-size: 18px;
+  color: #666;
+  margin: 0;
+}
+
+.movie-detail__watch-button {
+  margin-top: 20px;
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
+  background-color: #e50914;
+  /* Color rojo similar a Netflix */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  /* Efecto de transición en el color de fondo */
+}
+
+.movie-detail__watch-button:hover {
+  background-color: #ff0000;
+  /* Color rojo más claro al pasar el mouse */
+}
