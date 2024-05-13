@@ -41,7 +41,7 @@ function MovieDetailPage() {
               <p className="movie-detail__overview">{movie.overview}</p>
               <p className="movie-detail__popularity">Popularidad: {movie.popularity}</p>
               <div className="movie-detail__rating">
-              <div className="movie-rating">
+              <div className="movie-detail__vote_average">
                   {[...Array(Math.floor(movie.vote_average / 2))].map((_, index) => (
                     <Star key={index} filled />
                   ))}

@@ -1,11 +1,10 @@
-// MovieListPage.js
-
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { moviesAll } from '../../services/MovieService';
 import Spinner from '../../components/Spinner/spinner';
 import Star from '../../components/star/star';
 import './MoviesListPage.css';
+
 
 function MovieListPage() {
   const [movies, setMovies] = useState([]);
@@ -40,8 +39,11 @@ function MovieListPage() {
     setCurrentPage(prevPage => prevPage + 1);
   };
 
+
+
   return (
     <div className="peliculas-container">
+
       <div className="movies-container">
         {movies.map((movie, index) => (
           <div key={`${movie.id}-${index}`} className="movie-card">
