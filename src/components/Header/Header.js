@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './Header.css';
 
 function HeaderComponent() {
@@ -51,7 +52,9 @@ function HeaderComponent() {
         <div className={`HeaderComponent ${scrolled ? 'scrolled' : ''}`}>
             <div className='bg-[#17202A ] flex justify-between items-center h-24 max-w-[100%] mx-auto px-4 text-white'>
                 {/* Logo */}
-                <h1 className='w-full text-3xl font-bold text-[#00df9a]'>Cineflix</h1>
+                <h1 className='w-full text-3xl font-bold text-[#00df9a]'>
+                    <Link to="/" className="logo-link">Cineflix</Link>
+                </h1>
 
                 {/* Desktop Navigation */}
                 <ul className='hidden md:flex'>
