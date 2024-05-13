@@ -26,7 +26,7 @@ function MovieDetailPage() {
       {movie && (
         <>
           <div className="movie-detail-header">
-            <img src={`${process.env.REACT_APP_BASE_URL_TMDB_IMG}${movie.poster_path}`} className="movie-detail-poster" />
+            <img src={`${process.env.REACT_APP_BASE_URL_TMDB_IMG}${movie.poster_path}`} className="movie-detail-poster" alt={movie.title}/>
             <div className="movie-detail-info">
               <h1 className="movie-detail-title">{movie.title}</h1>
               <p className="movie-detail-rating">Puntuación: {movie.vote_average}</p>
