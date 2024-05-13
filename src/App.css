@@ -1,5 +1,20 @@
 .App {
   text-align: center;
+  position: relative;
+}
+
+.HeaderComponent {
+  position: fixed; /* Encabezado fijo */
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: 17202A; /* Color de fondo del encabezado con transparencia */
+  z-index: 1000; /* Asegura que el encabezado esté por encima del contenido */
+  transition: background-color 0.3s ease; /* Transición suave */
+}
+
+.HeaderComponent.scrolled {
+  background-color: rgba(255, 255, 255, 0.5); /* Cambia la opacidad cuando se hace scroll */
 }
 
 .App-logo {
@@ -26,6 +41,20 @@
 
 .App-link {
   color: #61dafb;
+}
+
+.background-color {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #17202A; /* Color de fondo deseado */
+  z-index: -1; /* Asegura que el fondo esté detrás de otros elementos */
+}
+
+.app-container {
+  position: relative; /* Asegura que los elementos hijos estén posicionados relativamente */
 }
 
 @keyframes App-logo-spin {
