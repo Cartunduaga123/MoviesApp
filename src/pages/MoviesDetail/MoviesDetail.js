@@ -1,55 +1,95 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getMovieById } from '../../services/MovieService';
+import { getMovieById, getCast } from '../../services/MovieService';
 import Spinner from '../../components/Spinner/spinner';
 import Star from '../../components/star/star';
 import './MoviesDetail.css';
+import defaultProfileImage from '../../assets/images/NotFound.svg';
 
 
 function MovieDetailPage() {
   const { id } = useParams();
   const [movie, setMovie] = useState(null);
+  const [cast, setCast] = useState([]);
   const [loading, setLoading] = useState(true); // Estado para controlar la carga
 
   useEffect(() => {
-    const fetchMovie = async () => {
-      const movieData = await getMovieById(id);
-      setMovie(movieData);
-      setLoading(false);
+    const fetchMovieDetails = async () => {
+      try {
+        setLoading(true);
+
+        // Obtener los detalles de la película
+        const movieData = await getMovieById(id);
+        console.log(movieData);
+        setMovie(movieData);
+
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching movie details:', error);
+        setLoading(false);
+      }
     };
 
-    fetchMovie();
+    const fetchCast = async () => {
+      try {
+        // Obtener el elenco de la película
+        const castData = await getCast(id);
+        console.log('cast', castData);
+        setCast(castData.cast); // Aquí accedemos a cast desde el objeto recibido
+      } catch (error) {
+        console.error('Error fetching cast:', error);
+      }
+    };
+
+    fetchMovieDetails();
+    fetchCast();
   }, [id]);
 
 
 
   return (
     <div className="movie-detail">
-      {loading ? ( // Si loading es true, mostramos el Spinner
+      {loading ? (
         <Spinner />
       ) : (
         <>
           <div className="movie-detail__header">
             <img className={`movie-detail__poster ${loading ? '' : 'loaded'}`}
-              src={`${process.env.REACT_APP_BASE_URL_TMDB_IMG}${movie.backdrop_path}`}
-              alt={movie.title} />
+              src={`${process.env.REACT_APP_BASE_URL_TMDB_IMG}${movie?.backdrop_path}`}
+              alt={movie?.title} />
             <div className="movie-detail__info">
-              <h2 className="movie-detail__title">{movie.title}</h2>
+              <h2 className="movie-detail__title">{movie?.title}</h2>
               <p className="movie-detail__release-date">
-                {movie.release_date}
+                {movie?.release_date}
               </p>
-              <p className="movie-detail__overview">{movie.overview}</p>
-              <p className="movie-detail__popularity">Popularidad: {movie.popularity}</p>
+              <p className="movie-detail__overview">{movie?.overview}</p>
+              <p className="movie-detail__popularity">Popularidad: {movie?.popularity}</p>
               <div className="movie-detail__rating">
-              <div className="movie-detail__vote_average">
-                  {[...Array(Math.floor(movie.vote_average / 2))].map((_, index) => (
+                <div className="movie-detail__vote_average">
+                  {[...Array(Math.floor(movie?.vote_average / 2))].map((_, index) => (
                     <Star key={index} filled />
                   ))}
-                  {movie.vote_average % 2 !== 0 && <Star filled={false} />}
+                  {movie?.vote_average % 2 !== 0 && <Star filled={false} />}
                 </div>
                 <p className="movie-detail__rating-label"></p>
               </div>
               <button className="movie-detail__watch-button">Ver película</button>
+            </div>
+          </div>
+          <div className="movie-detail__cast">
+            <h3>Elenco:</h3>
+            <div className="movie-detail__carousel">
+              {cast.map(actor => (
+                <div key={actor.id} className="movie-detail__cast-card">
+                  <img
+                    src={actor.profile_path ? `${process.env.REACT_APP_BASE_URL_TMDB_IMG}${actor.profile_path}` : defaultProfileImage}
+                    alt={actor.name}
+                    className="movie-detail__cast-card-image"
+                  />
+                  <p className="movie-detail__cast-card-name">{actor.name}</p>
+                  <p className="movie-detail__character">{actor.character}</p>
+                </div>
+              ))}
             </div>
           </div>
         </>

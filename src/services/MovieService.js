@@ -34,6 +34,17 @@ export const getMovieById = async (id) => {
     }
 };
 
+export const getCast= async (id) => {
+    try {
+        const response = await ApiTheMovieDB.get(`movie/${id}/credits?language=en-US`);
+        console.log('getCast', response.data.cast)
+        return response.data;
+    } catch (error) {
+        console.error('Error al obtener el Cast', error);
+        throw error;
+    }
+};
+
 // export const obtenerListadoPeliculas = () => {
 //     const [peliculas, setPeliculas] = useState([]);
 
