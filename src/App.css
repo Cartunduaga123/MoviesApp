@@ -14,7 +14,7 @@
 }
 
 .HeaderComponent.scrolled {
-  background-color: rgba(255, 255, 255, 0.5); /* Cambia la opacidad cuando se hace scroll */
+  background-color: rgba(43, 45, 54, 0.8); /* Cambia la opacidad cuando se hace scroll */
 }
 
 .App-logo {

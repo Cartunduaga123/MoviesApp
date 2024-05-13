@@ -6,16 +6,13 @@ import './Header.css';
 
 function HeaderComponent() {
     const [nav, setNav] = useState(false);
-    const [scrolled, setScrolled] = useState(false);
-    const [hidden, setHidden] = useState(false);
-    const [lastScrollTop, setLastScrollTop] = useState(0);
+    const [scrolled, setScrolled] = useState(false); // Nuevo estado para controlar el scroll
 
+    // Función para manejar el cambio de opacidad del encabezado al hacer scroll
     useEffect(() => {
         const handleScroll = () => {
-            const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            setHidden(currentScrollTop > lastScrollTop && currentScrollTop > 950);
-            setScrolled(currentScrollTop > 0);
-            setLastScrollTop(currentScrollTop <= 0 ? 0 : currentScrollTop);
+            const isScrolled = window.scrollY > 0;
+            setScrolled(isScrolled);
         };
 
         window.addEventListener('scroll', handleScroll);
@@ -23,12 +20,14 @@ function HeaderComponent() {
         return () => {
             window.removeEventListener('scroll', handleScroll);
         };
-    }, [lastScrollTop]);
+    }, []);
 
+    // Función para manejar el toggle del menú
     const handleNav = () => {
         setNav(!nav);
     };
 
+    // Array de elementos de navegación
     const navItems = [
         { id: 1, text: 'Home' },
         { id: 2, text: 'Company' },
@@ -38,7 +37,7 @@ function HeaderComponent() {
     ];
 
     return (
-        <div className={`HeaderComponent ${scrolled ? 'scrolled' : ''} ${hidden ? 'hidden' : 'visible'}`}>
+        <div className={`HeaderComponent ${scrolled ? 'scrolled' : ''}`}>
             <div className='bg-[#17202A ] flex justify-between items-center h-24 max-w-[100%] mx-auto px-4 text-white'>
                 {/* Logo */}
                 <h1 className='w-full text-3xl font-bold text-[#00df9a]'>Cineflix</h1>
@@ -64,7 +63,7 @@ function HeaderComponent() {
                 <ul
                     className={
                         nav
-                            ? 'fixed md:hidden left-0 top-0 w-[60%] h-full border-r border-r-gray-900 bg-[#000300] ease-in-out duration-500'
+                            ? 'fixed md:hidden left-0 top-0 w-[60%] h-full border-r border-r-gray-900 bg-[#17202A] ease-in-out duration-500'
                             : 'ease-in-out w-[60%] duration-500 fixed top-0 bottom-0 left-[-100%]'
                     }
                 >
