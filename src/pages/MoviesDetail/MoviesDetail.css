@@ -1,0 +1,54 @@
+/* styles.css */
+
+.movie-detail-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .movie-detail-header {
+    display: flex;
+    align-items: flex-start;
+  }
+  
+  .movie-detail-poster {
+    width: 200px;
+    height: auto;
+    margin-right: 20px;
+  }
+  
+  .movie-detail-info {
+    flex: 1;
+  }
+  
+  .movie-detail-title {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .movie-detail-rating {
+    font-size: 18px;
+    margin-bottom: 5px;
+  }
+  
+  .movie-detail-votes,
+  .movie-detail-popularity,
+  .movie-detail-release-date,
+  .movie-detail-adult {
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+  
+  .movie-detail-overview {
+    margin-top: 20px;
+  }
+  
+  .movie-detail-overview h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .movie-detail-overview p {
+    font-size: 16px;
+    line-height: 1.5;
+  }
