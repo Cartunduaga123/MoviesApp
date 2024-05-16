@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+
 import { moviesAll } from '../../services/MovieService';
 import Spinner from '../../components/Spinner/spinner';
 import Star from '../../components/star/star';
+
 import './MoviesListPage.css';
 
 
@@ -38,8 +40,6 @@ function MovieListPage() {
     // Incrementar la página actual
     setCurrentPage(prevPage => prevPage + 1);
   };
-
-
 
   return (
     <div className="peliculas-container">

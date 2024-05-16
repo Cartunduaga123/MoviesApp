@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
+
 import { getMovieById, getCast } from '../../services/MovieService';
+
 import Spinner from '../../components/Spinner/spinner';
 import Star from '../../components/star/star';
+
 import './MoviesDetail.css';
 import defaultProfileImage from '../../assets/images/NotFound.svg';
 
@@ -46,7 +49,6 @@ function MovieDetailPage() {
   }, [id]);
 
 
-
   return (
     <div className="movie-detail">
       {loading ? (
@@ -73,7 +75,7 @@ function MovieDetailPage() {
                 </div>
                 <p className="movie-detail__rating-label"></p>
               </div>
-              <button className="movie-detail__watch-button">Ver película</button>
+              <Link to={`/trailer`} className="movie-detail__watch-button">Ver Trailer</Link>
             </div>
           </div>
           <div className="movie-detail__cast">
