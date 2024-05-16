@@ -8,8 +8,6 @@ function HeaderComponent() {
     const [nav, setNav] = useState(false);
     const [scrolled, setScrolled] = useState(false); // Nuevo estado para controlar el scroll
     const negative = useNavigate();
-    const location = useLocation();
-    const isMovieListPage = location.pathname === '/';
     const [searchTerm, setSearchTerm] = useState('');
 
     // Función para manejar el cambio de opacidad del encabezado al hacer scroll
@@ -40,13 +38,6 @@ function HeaderComponent() {
         { id: 5, text: 'Contact' },
     ];
 
-    // Función para manejar el cambio en el término de búsqueda
-    const handleSearch = (e) => {
-        const term = e.target.value;
-        setSearchTerm(term);
-        // Redirigir a la página de listado de películas con el término de búsqueda
-        negative(`/?search=${term}`);
-    };
 
     return (
         <div className={`HeaderComponent ${scrolled ? 'scrolled' : ''}`}>
@@ -67,17 +58,6 @@ function HeaderComponent() {
                         </li>
                     ))}
                 </ul>
-
-                {/* Campo de búsqueda */}
-                {isMovieListPage && (
-                    <input
-                        type="text"
-                        value={searchTerm}
-                        onChange={handleSearch}
-                        placeholder="Buscar películas..."
-                        className="search-input"
-                    />
-                )}
 
                 {/* Mobile Navigation Icon */}
                 <div onClick={handleNav} className='block md:hidden'>

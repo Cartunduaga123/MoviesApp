@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-import { moviesAll } from '../../services/MovieService';
+import { moviesAll, searchMovies } from '../../services/MovieService';
 import Spinner from '../../components/Spinner/spinner';
-import Star from '../../components/star/star';
+import Star from '../../components/Star/star';
+import SearchBar from '../../components/Search_Movie/SearchMovie';
 
 import './MoviesListPage.css';
+
 
 
 function MovieListPage() {
@@ -41,9 +43,29 @@ function MovieListPage() {
     setCurrentPage(prevPage => prevPage + 1);
   };
 
+  const handleSearch = async (query) => {
+    try {
+      setLoading(true);
+  
+      let searchedMovies;
+      if (query) {
+        searchedMovies = await searchMovies(query);
+      } else {
+        searchedMovies = await moviesAll();
+        setCurrentPage(1);
+      }
+  
+      setMovies(searchedMovies);
+    } catch (error) {
+      console.error('Error searching movies:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="peliculas-container">
-
+       <SearchBar onSearch={handleSearch}/>
       <div className="movies-container">
         {movies.map((movie, index) => (
           <div key={`${movie.id}-${index}`} className="movie-card">

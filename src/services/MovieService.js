@@ -45,6 +45,22 @@ export const getCast= async (id) => {
     }
 };
 
+// Esta función busca películas por un término de búsqueda
+export async function searchMovies(query, page) {
+    try {
+      const response = await ApiTheMovieDB.get('/search/movie', {
+        params: {
+          query,
+          page
+        }
+      });
+  
+      return response.data.results;
+    } catch (error) {
+      throw new Error(`Error buscando peliculas ${error.message}`);
+    }
+  }
+
 // export const obtenerListadoPeliculas = () => {
 //     const [peliculas, setPeliculas] = useState([]);
 

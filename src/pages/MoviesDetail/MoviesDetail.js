@@ -4,10 +4,13 @@ import { useParams, Link } from 'react-router-dom';
 import { getMovieById, getCast } from '../../services/MovieService';
 
 import Spinner from '../../components/Spinner/spinner';
-import Star from '../../components/star/star';
+import CastCarousel from '../../components/Cast/Cast';
+import Star from '../../components/Star/star';
+
 
 import './MoviesDetail.css';
 import defaultProfileImage from '../../assets/images/NotFound.svg';
+
 
 
 function MovieDetailPage() {
@@ -80,19 +83,7 @@ function MovieDetailPage() {
           </div>
           <div className="movie-detail__cast">
             <h3>Elenco:</h3>
-            <div className="movie-detail__carousel">
-              {cast.map(actor => (
-                <div key={actor.id} className="movie-detail__cast-card">
-                  <img
-                    src={actor.profile_path ? `${process.env.REACT_APP_BASE_URL_TMDB_IMG}${actor.profile_path}` : defaultProfileImage}
-                    alt={actor.name}
-                    className="movie-detail__cast-card-image"
-                  />
-                  <p className="movie-detail__cast-card-name">{actor.name}</p>
-                  <p className="movie-detail__character">{actor.character}</p>
-                </div>
-              ))}
-            </div>
+            <CastCarousel cast={cast} /> 
           </div>
         </>
       )}
