@@ -18,7 +18,7 @@ function MovieListPage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Mostrar el indicador de carga
+        
         setLoading(true);
 
         // Obtener lista de películas de la página actual
