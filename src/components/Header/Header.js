@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import './Header.css';
 
 function HeaderComponent() {
     const [nav, setNav] = useState(false);
     const [scrolled, setScrolled] = useState(false); // Nuevo estado para controlar el scroll
-    const negative = useNavigate();
-    const [searchTerm, setSearchTerm] = useState('');
+    const navigate = useNavigate();
 
     // Función para manejar el cambio de opacidad del encabezado al hacer scroll
     useEffect(() => {
@@ -31,18 +30,22 @@ function HeaderComponent() {
 
     // Array de elementos de navegación
     const navItems = [
-        { id: 1, text: 'Home' },
-        { id: 2, text: 'Company' },
-        { id: 3, text: 'Resources' },
-        { id: 4, text: 'About' },
-        { id: 5, text: 'Contact' },
+        { id: 1, text: 'Home', route: '/' },
+        { id: 2, text: 'Rentar', route: '/rentar' },
+        { id: 3, text: 'Resources', route: '/resources' },
+        { id: 4, text: 'About', route: '/about' },
+        { id: 5, text: 'Contact', route: '/contact' },
     ];
 
+    // Función para manejar la navegación al hacer clic en los elementos del menú
+    const handleNavigation = (route) => {
+        navigate(route);
+        setNav(false); // Cierra el menú en dispositivos móviles
+    };
 
     return (
         <div className={`HeaderComponent ${scrolled ? 'scrolled' : ''}`}>
-            <div className='bg-[#17202A ] flex justify-between items-center h-24 max-w-[100%] mx-auto px-4 text-white'>
-                {/* Logo */}
+            <div className='bg-[#17202A] flex justify-between items-center h-24 max-w-[100%] mx-auto px-4 text-white'>
                 <h1 className='w-full text-3xl font-bold text-[#00df9a]'>
                     <Link to="/" className="logo-link">Cineflix</Link>
                 </h1>
@@ -53,6 +56,7 @@ function HeaderComponent() {
                         <li
                             key={item.id}
                             className='p-4 hover:bg-[#00df9a] rounded-xl m-2 cursor-pointer duration-300 hover:text-black'
+                            onClick={() => handleNavigation(item.route)}
                         >
                             {item.text}
                         </li>
@@ -72,14 +76,13 @@ function HeaderComponent() {
                             : 'ease-in-out w-[60%] duration-500 fixed top-0 bottom-0 left-[-100%]'
                     }
                 >
-                    {/* Mobile Logo */}
                     <h1 className='w-full text-3xl font-bold text-[#00df9a] m-4'>Cineflix.</h1>
 
-                    {/* Mobile Navigation Items */}
                     {navItems.map(item => (
                         <li
                             key={item.id}
                             className='p-4 border-b rounded-xl hover:bg-[#00df9a] duration-300 hover:text-black cursor-pointer border-gray-600'
+                            onClick={() => handleNavigation(item.route)}
                         >
                             {item.text}
                         </li>

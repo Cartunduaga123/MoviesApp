@@ -18,7 +18,7 @@ function MovieListPage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        
+        // Mostrar el indicador de carga
         setLoading(true);
 
         // Obtener lista de películas de la página actual
@@ -57,7 +57,7 @@ function MovieListPage() {
   
       setMovies(searchedMovies);
     } catch (error) {
-      console.error('Error searching movies:', error);
+      console.error('Error buscando peliculas', error);
     } finally {
       setLoading(false);
     }
@@ -65,7 +65,10 @@ function MovieListPage() {
 
   return (
     <div className="peliculas-container">
-       <SearchBar onSearch={handleSearch}/>
+      <div className="search-bar-container">
+        <SearchBar onSearch={handleSearch} />
+      </div>
+      {/* <SearchBar onSearch={handleSearch}/> */}
       <div className="movies-container">
         {movies.map((movie, index) => (
           <div key={`${movie.id}-${index}`} className="movie-card">
@@ -85,8 +88,6 @@ function MovieListPage() {
               </div>
               <div className="movie-details">
                 <h2>{movie.title}</h2>
-                <p>Adulto: {movie.adult ? 'Sí' : 'No'}</p>
-                <p>Fecha de Lanzamiento: {movie.release_date}</p>
               </div>
             </Link>
           </div>
