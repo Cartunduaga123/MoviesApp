@@ -4,17 +4,17 @@
 }
 
 .HeaderComponent {
-  position: fixed; /* Encabezado fijo */
+  position: fixed; 
   top: 0;
   left: 0;
   width: 100%;
-  background-color: 17202A; /* Color de fondo del encabezado con transparencia */
-  z-index: 1000; /* Asegura que el encabezado esté por encima del contenido */
-  transition: background-color 0.3s ease; /* Transición suave */
+  background-color: 17202A; 
+  z-index: 1000; 
+  transition: background-color 0.3s ease;
 }
 
 .HeaderComponent.scrolled {
-  background-color: rgba(43, 45, 54, 0.8); /* Cambia la opacidad cuando se hace scroll */
+  background-color: rgba(43, 45, 54, 0.8); 
 }
 
 .App-logo {
@@ -49,12 +49,12 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #17202A; /* Color de fondo deseado */
-  z-index: -1; /* Asegura que el fondo esté detrás de otros elementos */
+  background-color: #17202A; 
+  z-index: -1; 
 }
 
 .app-container {
-  position: relative; /* Asegura que los elementos hijos estén posicionados relativamente */
+  position: relative; 
 }
 
 @keyframes App-logo-spin {

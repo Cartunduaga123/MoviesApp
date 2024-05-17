@@ -18,20 +18,16 @@ function MovieListPage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Mostrar el indicador de carga
         setLoading(true);
 
-        // Obtener lista de películas de la página actual
         const moviesData = await moviesAll(currentPage);
 
-        // Concatenar las nuevas películas con las anteriores
         setMovies(prevMovies => [...prevMovies, ...moviesData]);
 
-        // Ocultar el indicador de carga después de cargar las películas
         setLoading(false);
       } catch (error) {
         console.error('Error al cargar las películas:', error);
-        setLoading(false); // Asegúrate de ocultar el indicador de carga en caso de error
+        setLoading(false); 
       }
     };
 
@@ -39,7 +35,6 @@ function MovieListPage() {
   }, [currentPage]);
 
   const loadMoreMovies = () => {
-    // Incrementar la página actual
     setCurrentPage(prevPage => prevPage + 1);
   };
 
@@ -64,15 +59,14 @@ function MovieListPage() {
   };
 
   return (
-    <div className="peliculas-container">
+    <div className="movies-header">
       <div className="search-bar-container">
         <SearchBar onSearch={handleSearch} />
       </div>
-      {/* <SearchBar onSearch={handleSearch}/> */}
       <div className="movies-container">
         {movies.map((movie, index) => (
           <div key={`${movie.id}-${index}`} className="movie-card">
-            <Link to={`/movie/${movie.id}`} className="movie-link"> {/* Enlace al detalle de la película */}
+            <Link to={`/movie/${movie.id}`} className="movie-link"> 
               <img className="movie-poster"
                 src={`${process.env.REACT_APP_BASE_URL_TMDB_IMG}${movie.poster_path}`}
                 alt={movie.title} />

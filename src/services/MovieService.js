@@ -45,7 +45,7 @@ export const getCast= async (id) => {
     }
 };
 
-// Esta función busca películas por un término de búsqueda
+
 export async function searchMovies(query, page) {
     try {
       const response = await ApiTheMovieDB.get('/search/movie', {
@@ -61,43 +61,3 @@ export async function searchMovies(query, page) {
     }
   }
 
-// export const obtenerListadoPeliculas = () => {
-//     const [peliculas, setPeliculas] = useState([]);
-
-//     useEffect(() => {
-//         const API_KEY = process.env.REACT_APP_API_KEY
-//         const URL = `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=es&page=1`;
-
-//         fetch(URL)
-//             .then(response => response.json())
-//             .then(data => {
-//                 console.log(data.results); // Muestra los resultados en la consola para verificar que estén llegando correctamente
-//                 setPeliculas(data.results);
-//             })
-//             .catch(error => console.error('Error al obtener el listado de películas:', error));
-//     }, []);
-// };
-
-// export const movieDetails = async (movieId) => {
-//     try {
-//         const response = await ApiTheMovieDB.get(movie/${movieId});
-//         return response.data;
-//     } catch (error) {
-//         console.error('Error fetching movie details:', error);
-//         return null;
-//     }
-// };
-
-// export const genres = async () => {
-//     try {
-//         const response = await axios.get(${process.env.BASE_URL_TMDB}genre/movie/list, {
-//             params: {
-//                 api_key: API_KEY // Reemplaza 'tu_api_key' con tu clave de API
-//             }
-//         });
-//         return response.data.genres;
-//     } catch (error) {
-//         console.error('Error fetching genres:', error);
-//         return []; // Devuelve un array vacío en caso de error
-//     }
-// };

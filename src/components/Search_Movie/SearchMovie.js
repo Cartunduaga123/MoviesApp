@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './SearchMovie.css';
 
 function SearchBar({ onSearch }) {
   const [query, setQuery] = useState('');
@@ -11,7 +12,6 @@ function SearchBar({ onSearch }) {
     const value = e.target.value;
     setQuery(value);
     
-    // Si el campo de búsqueda está vacío, ejecutar la búsqueda con una cadena vacía
     if (value === '') {
       onSearch('');
     }

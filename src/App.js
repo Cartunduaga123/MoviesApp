@@ -6,6 +6,7 @@ import HeaderComponent from './components/Header/Header';
 import MovieListPage from './pages/MoviesListPage/MovieListPage';
 import MovieDetailPage from './pages/MoviesDetail/MoviesDetail';
 import MovieTrailerPage from './pages/MoviesTrailer/MovieTrailerPage';
+import RentMoviePage from './pages/RentMoviePage/RentMoviePage';
 
 function App() {
   return (
@@ -23,11 +24,12 @@ function Content() {
   const location = useLocation();
 
   return (
-    <div className="content" style={{ paddingTop: '100px' }}> {/* Asegura que el contenido no quede oculto detrás del encabezado */}
+    <div className="content" style={{ paddingTop: '100px' }}> 
       <Routes location={location}>
         <Route path="/" element={<MovieListPage />} />
         <Route path="/movie/:id" element={<MovieDetailPage />} />
         <Route path="/trailer" element={<MovieTrailerPage />} />
+        <Route path="/rent/:id" element={<RentMoviePage />} />
       </Routes>
     </div>
   );

@@ -7,6 +7,7 @@ import Spinner from '../../components/Spinner/spinner';
 import CastCarousel from '../../components/Cast/Cast';
 import Star from '../../components/star/star';
 import FooterComponent from '../../components/footer/FooterComponent';
+import ModalComponent from '../../components/Modal/ModalComponent';
 
 import './MoviesDetail.css';
 
@@ -15,14 +16,14 @@ function MovieDetailPage() {
   const { id } = useParams();
   const [movie, setMovie] = useState(null);
   const [cast, setCast] = useState([]);
-  const [loading, setLoading] = useState(true); // Estado para controlar la carga
+  const [loading, setLoading] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
       try {
         setLoading(true);
 
-        // Obtener los detalles de la película
         const movieData = await getMovieById(id);
         console.log(movieData);
         setMovie(movieData);
@@ -36,10 +37,9 @@ function MovieDetailPage() {
 
     const fetchCast = async () => {
       try {
-        // Obtener el elenco de la película
         const castData = await getCast(id);
         console.log('cast', castData);
-        setCast(castData.cast); // Aquí accedemos a cast desde el objeto recibido
+        setCast(castData.cast);
       } catch (error) {
         console.error('Error fetching cast:', error);
       }
@@ -48,6 +48,14 @@ function MovieDetailPage() {
     fetchMovieDetails();
     fetchCast();
   }, [id]);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
 
   return (
@@ -76,14 +84,18 @@ function MovieDetailPage() {
                 </div>
                 <p className="movie-detail__rating-label"></p>
               </div>
-              <Link to={`/trailer`} className="movie-detail__watch-button">Ver Trailer</Link>
+              <div className="movie-detail__buttons-box">
+                <Link to={`/trailer`} className="movie-detail__watch-button">Ver Trailer</Link>
+                <button onClick={openModal} className="movie-detail__rent-button">Rentar Película</button>
+              </div>
             </div>
           </div>
           <div className="movie-detail__cast">
             <h3>Elenco:</h3>
             <CastCarousel cast={cast} />
           </div>
-          <FooterComponent /> {/* Agregar el componente Footer aquí */}
+          <FooterComponent />
+          <ModalComponent isOpen={isModalOpen} onClose={closeModal} movie={movie} />
         </>
       )}
     </div>
