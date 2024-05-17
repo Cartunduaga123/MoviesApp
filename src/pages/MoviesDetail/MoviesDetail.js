@@ -9,9 +9,6 @@ import Star from '../../components/star/star';
 
 
 import './MoviesDetail.css';
-import defaultProfileImage from '../../assets/images/NotFound.svg';
-
-
 
 function MovieDetailPage() {
   const { id } = useParams();
