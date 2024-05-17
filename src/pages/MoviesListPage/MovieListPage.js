@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { moviesAll, searchMovies } from '../../services/MovieService';
 import Spinner from '../../components/Spinner/spinner';
-import Star from '../../components/Star/star.js';
+import Star from '../../components/star/star.js';
 import SearchBar from '../../components/Search_Movie/SearchMovie';
 
 import './MoviesListPage.css';
