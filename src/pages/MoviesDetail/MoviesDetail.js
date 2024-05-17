@@ -6,9 +6,10 @@ import { getMovieById, getCast } from '../../services/MovieService';
 import Spinner from '../../components/Spinner/spinner';
 import CastCarousel from '../../components/Cast/Cast';
 import Star from '../../components/star/star';
-
+import FooterComponent from '../../components/footer/FooterComponent';
 
 import './MoviesDetail.css';
+
 
 function MovieDetailPage() {
   const { id } = useParams();
@@ -80,8 +81,9 @@ function MovieDetailPage() {
           </div>
           <div className="movie-detail__cast">
             <h3>Elenco:</h3>
-            <CastCarousel cast={cast} /> 
+            <CastCarousel cast={cast} />
           </div>
+          <FooterComponent /> {/* Agregar el componente Footer aquí */}
         </>
       )}
     </div>
