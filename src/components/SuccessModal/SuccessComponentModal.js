@@ -9,7 +9,10 @@ function SuccessModalComponent({ onClose }) {
         <div className="modal-content">
           <h2 className="modal-title">¡Película rentada exitosamente!</h2>
           <p className="modal-message">¡Disfruta de tu película!</p>
-          <Link to="/" className="modal-button" onClick={onClose}>Volver al inicio</Link>
+          <div className="modal-buttons__box">
+            <Link to="/" className="modal-button__back-home" onClick={onClose}>Volver al inicio</Link>
+            <Link to={`/watch-movie`}className="modal-button__view-movie" onClick={onClose}>Ver Pelicula</Link>
+          </div>
         </div>
       </div>
     </div>

@@ -23,24 +23,19 @@ function HeaderComponent() {
         };
     }, []);
 
-    // Función para manejar el toggle del menú
     const handleNav = () => {
         setNav(!nav);
     };
 
-    // Array de elementos de navegación
     const navItems = [
         { id: 1, text: 'Home', route: '/' },
-        { id: 2, text: 'Rentar', route: '/rentar' },
-        { id: 3, text: 'Resources', route: '/resources' },
         { id: 4, text: 'About', route: '/about' },
-        { id: 5, text: 'Contact', route: '/contact' },
     ];
 
-    // Función para manejar la navegación al hacer clic en los elementos del menú
+
     const handleNavigation = (route) => {
         navigate(route);
-        setNav(false); // Cierra el menú en dispositivos móviles
+        setNav(false); 
     };
 
     return (
@@ -50,7 +45,6 @@ function HeaderComponent() {
                     <Link to="/" className="logo-link">Cineflix</Link>
                 </h1>
 
-                {/* Desktop Navigation */}
                 <ul className='hidden md:flex'>
                     {navItems.map(item => (
                         <li
@@ -63,12 +57,10 @@ function HeaderComponent() {
                     ))}
                 </ul>
 
-                {/* Mobile Navigation Icon */}
                 <div onClick={handleNav} className='block md:hidden'>
                     {nav ? <AiOutlineClose size={20} /> : <AiOutlineMenu size={20} />}
                 </div>
 
-                {/* Mobile Navigation Menu */}
                 <ul
                     className={
                         nav

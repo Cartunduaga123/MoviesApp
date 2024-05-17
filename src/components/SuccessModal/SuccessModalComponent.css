@@ -30,8 +30,12 @@
     font-size: 1.2rem;
     margin-bottom: 20px;
   }
+
+  .modal-buttons{
+
+  }
   
-  .modal-button {
+  .modal-button__back-home {
     display: inline-block;
     background-color: #007bff;
     color: #fff;
@@ -39,8 +43,30 @@
     border-radius: 5px;
     text-decoration: none;
   }
+
+  .modal-button__view-movie {
+    display: inline-block;
+    background-color: #e50914;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+  }
   
-  .modal-button:hover {
-    background-color: #0056b3;
+  .modal-button__back-home:hover {
+    background-color: #2e6fb4;
+  }
+
+  .modal-button__view-movie:hover {
+    background-color: #c94b52;
+  }
+
+  .modal-buttons__box {
+    display: flex;
+    justify-content: center; 
+  }
+  
+  .modal-buttons__box > * {
+    margin: 0 10px; 
   }
   
