@@ -5,7 +5,7 @@ import { getMovieById, getCast } from '../../services/MovieService';
 
 import Spinner from '../../components/Spinner/spinner';
 import CastCarousel from '../../components/Cast/Cast';
-import Star from '../../components/Star/star';
+import Star from '../../components/star/star';
 
 
 import './MoviesDetail.css';
